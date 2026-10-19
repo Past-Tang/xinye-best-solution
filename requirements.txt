@@ -1,0 +1,40 @@
+# 信也科技杯 2026 复赛包 - Python 依赖清单
+#
+# 安装：
+#   pip install -r requirements.txt
+#
+# 注：torch 必须配 CUDA 12.x（建议用 PyTorch 官方 docker 镜像 pytorch:2.8.0-cuda12.4-cudnn9）
+# pyannote.audio 拉链式依赖（包含 onnxruntime / torchaudio 等），按官方说明安装
+
+# 核心训练 / 推理
+# torch 由 base image 提供（2.5.1+cu124），不要重装以免破坏 CUDA 链接
+transformers==4.57.6
+peft==0.14.0
+accelerate==1.10.1
+tokenizers==0.22.1
+safetensors==0.6.2
+sentencepiece==0.2.1
+
+# 数据处理 / 音频
+librosa==0.11.0
+soundfile==0.13.1
+scipy==1.15.3
+numpy==2.2.6
+PyYAML==6.0.2
+
+# 机器学习
+scikit-learn==1.7.2
+
+# 声学 overlap（callhome-zho pyannote seg3 加载）
+pyannote.audio==4.0.4
+
+# 模型下载（whisper / qwen3，可选——复赛 docker 应直接用 models/ 内 ckpt）
+modelscope==1.30.0
+
+# 实用
+tqdm==4.67.1
+# protobuf 不固定版本——pyannote.audio→opentelemetry 需要 <7, 项目无具体版本依赖
+protobuf<7
+
+# 复赛环境硬性要求（PDF 第 8 页）
+pynvml

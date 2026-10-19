@@ -1,0 +1,19 @@
+{
+  "bc_thr": 0.6100000000000001,
+  "base_f1": 0.25,
+  "rule": {
+    "rate_thr": 0.049999999999999996,
+    "cons_thr": 0.6496687978506088,
+    "f1": 0.2556213017751479,
+    "n_del": 86,
+    "del_fp": 80,
+    "del_precision": 0.9302325581395349
+  },
+  "oof_sources": [
+    "outputs/oof/temporal_tail25_grid25.npz",
+    "outputs/oof/stride5_e16_grid25.npz",
+    "outputs/oof/main_e12_grid25_fixed.npz",
+    "outputs/oof/textlora_e09_grid25.npz"
+  ],
+  "note": "delete BC pred when ctx_bc_rate>=rate_thr and consensus<=cons_thr"
+}

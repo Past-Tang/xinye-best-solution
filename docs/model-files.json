@@ -1,0 +1,40 @@
+{
+  "description": "Local preserved checkpoint inventory; weights excluded; binding to original scoring image not independently verified",
+  "files": [
+    {
+      "size": 32547115,
+      "sha256": "ee32e6799add4dc078fc5deac3845f9841ec688d6862428de1d3584238d19546",
+      "filename": "main_e12_slim.pt"
+    },
+    {
+      "size": 45759761,
+      "sha256": "800f7f5240590c3c56446783a6c862bf85dee21d7cd223c713c8ac5cc9381690",
+      "filename": "stride5_e16_slim.pt"
+    },
+    {
+      "size": 76029416,
+      "sha256": "e2bf1015a5247826b88b0a621ac6a3b7737485fe1a869477448f05eca1da7c3f",
+      "filename": "textlora_e09_slim.pt"
+    },
+    {
+      "size": 75845195,
+      "sha256": "f52a4eaeb26cadf74887da9226165ddccce0ed3ba39349ef812b26e75499aba8",
+      "filename": "tail25_slim.pt"
+    },
+    {
+      "size": 35137675,
+      "sha256": "7e736ecbeae0758a8799574e8ed3ee73ff40eeb0fff197a6ab9c51bc25e56fd9",
+      "filename": "s123_heavy_slim.pt"
+    },
+    {
+      "size": 35140427,
+      "sha256": "2bd16ef3a6e15853d4374f9c6cf9eff74b46e674a11652d0874233f65907b48f",
+      "filename": "s124_aggressive_slim.pt"
+    },
+    {
+      "size": 3826513,
+      "sha256": "dea91c909d27c31ee43c89b365f76ee75763c73e6fdc3ba979ae86e549dd5908",
+      "filename": "activity_tcn_best.pt"
+    }
+  ]
+}
