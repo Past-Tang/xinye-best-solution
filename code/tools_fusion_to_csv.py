@@ -113,14 +113,23 @@ def search_per_class_weights(probs_list, labels, step=0.1, objective="auc"):
 
 
 def load_test(probs_paths, ids_paths):
+    if not probs_paths or len(probs_paths) != len(ids_paths):
+        raise ValueError("Provide one ID file per probability array")
     probs, ids = [], None
     for p, ip in zip(probs_paths, ids_paths):
-        x = np.load(p).astype(np.float64)
-        i = [l.strip().zfill(4) for l in open(ip)]
+        x = np.load(p, allow_pickle=False).astype(np.float64)
+        raw_ids = Path(ip).read_text().splitlines()
+        i = [value.strip().zfill(4) for value in raw_ids]
+        if not i or any(not value.strip() for value in raw_ids) or len(set(i)) != len(i):
+            raise ValueError(f"Empty or duplicate test IDs: {ip}")
+        if x.shape != (len(i), len(N)) or not np.isfinite(x).all():
+            raise ValueError(f"Invalid probability shape or values: {p}")
+        if ((x < 0) | (x > 1)).any():
+            raise ValueError(f"Probabilities outside [0, 1]: {p}")
         if ids is None:
             ids = i
-        else:
-            assert i == ids, f"test ids 不一致: {ip}"
+        elif i != ids:
+            raise ValueError(f"Test IDs do not align: {ip}")
         probs.append(x)
     return probs, ids
 
@@ -131,7 +140,8 @@ def refrate_topk(probs):
     pred = np.zeros_like(probs, dtype=np.int32)
     for j, name in enumerate(N):
         k = int(round(REF[name] * n))
-        pred[np.argsort(probs[:, j])[-k:], j] = 1
+        if k > 0:
+            pred[np.argsort(probs[:, j])[-k:], j] = 1
     return pred
 
 

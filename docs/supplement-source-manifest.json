@@ -1,0 +1,102 @@
+{
+  "description": "Source provenance and current file hashes for the code/configuration supplement. Historical source hashes are before path redaction and documented repairs.",
+  "files": [
+    {
+      "source": "archived_xinye/rematch_pkg/code/tools_audio_state_quick_oof.py",
+      "destination": "code/tools_audio_state_quick_oof.py",
+      "source_sha256": "de6910e91cd2cb9bc84ff7ab05eed68f04ca3e1943a0e6324b07df4f770083c6",
+      "export_sha256": "dbaf2c8430a3a89b2c021b2f8bf477a41b562bef11474e72966b106e8b825b36"
+    },
+    {
+      "source": "archived_xinye/复赛提交代码/code/prepare_runtime_config.py",
+      "destination": "code/prepare_runtime_config.py",
+      "source_sha256": "73a39b8074f72a3ef2952e6ffa816e3f857a6c22c841da3abbb54b0d551199e4",
+      "export_sha256": "0108f3bdc05bd9e644955d4acc6471aea9217ccb9c4703924fbe61d8579a16ab"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "NOTICE.md",
+      "export_sha256": "e040e9586df3eef8d51573b89cb671c92f892d6e1898a557d8f21dd8c241fa6e"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "README.md",
+      "export_sha256": "da604f78f0b5e2710b840ea83be094cc1d34fdb260f0a6bcb467a5218b4f75c1"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_chunkaux_5gpu.yaml",
+      "export_sha256": "f4461c8bcbfd95259f446cd6e47369e505bed7f681bc4bf6d6ccc1b5678d22fa"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_chunkaux_stride5_5gpu.yaml",
+      "export_sha256": "a74e7de72d5993a5592d9e6136c42e9e06767d5f835d2ca6efb04fe8a81781ce"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_seed123_heavy_5gpu.yaml",
+      "export_sha256": "a7d40bb5ce1f9fc5f7f01511c6f1b4505f6c458ab9922be6dcce1960982cabf7"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_seed124_aggressive_5gpu.yaml",
+      "export_sha256": "c83660fb947b51f141650303f5c0c506bf44b97c2ece2505642ae66bc2aa0b74"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_temporal_tail25_5gpu.yaml",
+      "export_sha256": "8deb3cf0a01d5be202661e9f9bb94d1e4d5b13a4b2b4267240303eba67dc9401"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/lora_textlora_4gpu.yaml",
+      "export_sha256": "cda4c08f699949e6b56e9d68a13a26abe5a749c19285ce7b116cdf161d7a966e"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/infer.py",
+      "export_sha256": "ac06fd41aaaa571c711bfc0f6cd481919e8ae812cf04f8448b3160e6c018c535"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/scripts/run_inference.sh",
+      "export_sha256": "07268efd78e9a04c5191672052da271a6d21938b453e41899e950c27bf3070f7"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/sweep/fusion_v161_bc104.py",
+      "export_sha256": "e924f862dd4cc97a01bafab325086b5fcce167e155f987640b574daefccb2031"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/tools_fusion_to_csv.py",
+      "export_sha256": "e924f862dd4cc97a01bafab325086b5fcce167e155f987640b574daefccb2031"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/checkpoint_utils.py",
+      "export_sha256": "33a1a58eafbe1d7678ce99e0c60d121d748a5aeb00e5594729775ec4575bc960"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "code/configs/activity_tcn.json",
+      "export_sha256": "569579032db2c18021a5a40e939cd9fd4692bc20c494e6bf0f139ff228f87ffe"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "docs/configuration.md",
+      "export_sha256": "5acf1b08fe0f128dd33a7754d08a444b12f8f4bff85e015fe009b71fd30ace99"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "docs/training-config-sources.json",
+      "export_sha256": "56b7abf4e28e43403a7d3a825b38d66956862d4d8d1de4131b2105439bca742d"
+    },
+    {
+      "source": "repository maintenance",
+      "destination": "tests/test_inference_contract.py",
+      "export_sha256": "be0450bda6e673b0c78aeabea554d6a8ddc1da4b46c06309a56135d86d85b707"
+    }
+  ]
+}

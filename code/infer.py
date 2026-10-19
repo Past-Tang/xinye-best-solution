@@ -31,6 +31,7 @@ from src.utils import load_config, set_env_paths  # noqa: E402
 from model.model import MultimodalLoRAChunkAuxModel  # noqa: E402
 from model.temporal_model import MultimodalTemporalModel  # noqa: E402
 from model.wavlm_temporal_model import MultimodalWavLMTemporalModel  # noqa: E402
+from checkpoint_utils import load_task_checkpoint  # noqa: E402
 
 
 def parse_args():
@@ -106,20 +107,8 @@ def main():
     else:
         model = MultimodalLoRAChunkAuxModel(cfg).to(device)
     ckpt = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    # Slim ckpt path: load only LoRA + heads + non-base params; base weights
-    # are already in `model` because the model factory loaded them from cfg.
-    if "slim_keep" in ckpt:
-        model_state = ckpt["slim_keep"]
-        print(f"[infer] slim ckpt detected: {len(model_state)} param tensors "
-              f"(epoch={ckpt.get('epoch')}, best={ckpt.get('best_metric')})")
-    else:
-        model_state = ckpt.get("model_ema", ckpt["model"])
-    # torch.compile wraps the model in _orig_mod., prefixing all state_dict keys.
-    # When loading a compiled checkpoint into an un-compiled model, strip the prefix.
-    _sample_key = next(iter(model_state))
-    if _sample_key.startswith("_orig_mod."):
-        model_state = {k.replace("_orig_mod.", "", 1): v for k, v in model_state.items()}
-    model.load_state_dict(model_state, strict=False)
+    # Slim files may omit the base model, but never a task projection or head.
+    load_task_checkpoint(model, ckpt)
     model.eval()
 
     amp_dtype = get_amp_dtype(args.amp_dtype)

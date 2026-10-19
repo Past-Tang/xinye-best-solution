@@ -275,6 +275,8 @@ CSV 列顺序为 `segment_id,c,na,i,bc,t`，五个预测列取值为 0 或 1。�
 
 ## 代码导航
 
+各成员 YAML、Activity TCN 参数与固定七成员入口见[成员配置与运行入口](docs/configuration.md)。配置按保存的 checkpoint 整理，`main` 与 `stride5` 均不启用 FutureAux。
+
 | 模块 | 文件 | 阅读重点 |
 |---|---|---|
 | 数据与目标 | [dataset.py](code/_lib/src/data/dataset.py) | 历史窗口、未来窗口和五列标签映射 |

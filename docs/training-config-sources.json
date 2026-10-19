@@ -1,0 +1,44 @@
+[
+  {
+    "checkpoint": "main_e12_slim.pt",
+    "checkpoint_sha256": "ee32e6799add4dc078fc5deac3845f9841ec688d6862428de1d3584238d19546",
+    "config": "code/configs/lora_chunkaux_5gpu.yaml",
+    "config_sha256": "f4461c8bcbfd95259f446cd6e47369e505bed7f681bc4bf6d6ccc1b5678d22fa",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  },
+  {
+    "checkpoint": "stride5_e16_slim.pt",
+    "checkpoint_sha256": "800f7f5240590c3c56446783a6c862bf85dee21d7cd223c713c8ac5cc9381690",
+    "config": "code/configs/lora_chunkaux_stride5_5gpu.yaml",
+    "config_sha256": "a74e7de72d5993a5592d9e6136c42e9e06767d5f835d2ca6efb04fe8a81781ce",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  },
+  {
+    "checkpoint": "textlora_e09_slim.pt",
+    "checkpoint_sha256": "e2bf1015a5247826b88b0a621ac6a3b7737485fe1a869477448f05eca1da7c3f",
+    "config": "code/configs/lora_textlora_4gpu.yaml",
+    "config_sha256": "cda4c08f699949e6b56e9d68a13a26abe5a749c19285ce7b116cdf161d7a966e",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  },
+  {
+    "checkpoint": "tail25_slim.pt",
+    "checkpoint_sha256": "f52a4eaeb26cadf74887da9226165ddccce0ed3ba39349ef812b26e75499aba8",
+    "config": "code/configs/lora_temporal_tail25_5gpu.yaml",
+    "config_sha256": "8deb3cf0a01d5be202661e9f9bb94d1e4d5b13a4b2b4267240303eba67dc9401",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  },
+  {
+    "checkpoint": "s123_heavy_slim.pt",
+    "checkpoint_sha256": "7e736ecbeae0758a8799574e8ed3ee73ff40eeb0fff197a6ab9c51bc25e56fd9",
+    "config": "code/configs/lora_seed123_heavy_5gpu.yaml",
+    "config_sha256": "a7d40bb5ce1f9fc5f7f01511c6f1b4505f6c458ab9922be6dcce1960982cabf7",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  },
+  {
+    "checkpoint": "s124_aggressive_slim.pt",
+    "checkpoint_sha256": "2bd16ef3a6e15853d4374f9c6cf9eff74b46e674a11652d0874233f65907b48f",
+    "config": "code/configs/lora_seed124_aggressive_5gpu.yaml",
+    "config_sha256": "c83660fb947b51f141650303f5c0c506bf44b97c2ece2505642ae66bc2aa0b74",
+    "changes": "Only paths, base-model locations and cache environment were normalized."
+  }
+]

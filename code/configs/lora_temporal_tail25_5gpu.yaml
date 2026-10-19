@@ -6,20 +6,20 @@ stride: 25
 sample_rate: 16000
 max_train_samples: null
 max_valid_samples: null
-num_workers: 0
+num_workers: 2
 pin_memory: true
 persistent_workers: true
 model:
   type: temporal
 paths:
-  project_root: /workspace/xinye/code_src/pb
-  train_audio_dir: /workspace/xinye/data/train/audio
-  train_text_dir: /workspace/xinye/data/train/text
-  train_labels_dir: /workspace/xinye/data/train/labels
-  output_root: /workspace/xinye/code_src/pb/outputs_temporal_tail25
-  checkpoints_dir: /workspace/xinye/code_src/pb/outputs_temporal_tail25/checkpoints
-  logs_dir: /workspace/xinye/code_src/pb/outputs_temporal_tail25/logs
-  cache_root: /workspace/xinye/.cache
+  project_root: .
+  train_audio_dir: data/train/audio
+  train_text_dir: data/train/text
+  train_labels_dir: data/train/labels
+  output_root: outputs/tail25_slim
+  checkpoints_dir: outputs/tail25_slim/checkpoints
+  logs_dir: outputs/tail25_slim/logs
+  cache_root: .cache
 labels:
   C: 0
   T: 1
@@ -41,11 +41,11 @@ split:
   by_conversation: true
 audio_encoder:
   type: whisper_lora_chunkaux
-  model_name: /workspace/xinye/.cache/modelscope/AI-ModelScope/whisper-large-v3
+  model_name: models/whisper-large-v3
   tail_frames: 300
   attn_implementation: sdpa
 text_encoder:
-  model_name: /workspace/xinye/.cache/modelscope/Qwen/Qwen3-0___6B
+  model_name: models/Qwen3-0.6B
   max_length: 256
   freeze_backbone: true
   tail_ratio: 0.3
@@ -153,9 +153,8 @@ train:
   tuned_eval_threshold_step: 0.01
   save_epoch_checkpoints: true
 env:
-  HF_HOME: /workspace/xinye/.cache/huggingface
-  TRANSFORMERS_CACHE: /workspace/xinye/.cache/huggingface
-  TORCH_HOME: /workspace/xinye/.cache/torch
+  HF_HOME: .cache/huggingface
+  TORCH_HOME: .cache/torch
   HF_HUB_OFFLINE: '1'
   TRANSFORMERS_OFFLINE: '1'
 experiment:
