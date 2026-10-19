@@ -1,10 +1,14 @@
 # 信也科技杯：多模态对话轮次预测
 
+**简体中文（默认）** | [English](README.en.md)
+
 电话对话中的一次停顿，可能意味着说话者还要继续，也可能是另一方准备回应。信也科技杯 2026「对话轮次交互建模」复赛要求模型读取过去 **30 秒**的双声道音频、转写文本和历史事件标签，预测未来 **2 秒**内会发生哪些话轮事件。
 
 本方案使用 **Whisper-large-v3 + Qwen3-0.6B** 建模语音与文本，结合历史状态和独立的活动时序模型，得到七组预测。随后按类别加权融合，通过 REF top-k 控制各类候选数量，再用历史附和比例和声学重叠特征筛选 BC、I 预测。最终配置为 **v161_bc104**，复赛最佳成绩为 **0.668080 macro F1**。
 
-![历史输入、末尾汇聚范围与未来预测窗口](assets/conversation-timeline.svg)
+![历史输入、末尾汇聚范围与未来预测窗口](assets/conversation-timeline.png)
+
+[查看矢量图](assets/conversation-timeline.svg)
 
 | 项目 | 最终方案 |
 |---|---|
@@ -54,7 +58,9 @@ $$
 
 ## 多模态模型
 
-![常规多模态模型的三路编码与融合结构](assets/multimodal-architecture.svg)
+![常规多模态模型的三路编码与融合结构](assets/multimodal-architecture.png)
+
+[查看矢量图](assets/multimodal-architecture.svg)
 
 ### 音频编码与双声道汇聚
 
@@ -95,7 +101,9 @@ $$
 
 ## 时序与活动分支
 
-![tail25 与 Activity TCN 的内部结构](assets/temporal-branches.svg)
+![tail25 与 Activity TCN 的内部结构](assets/temporal-branches.png)
+
+[查看矢量图](assets/temporal-branches.svg)
 
 ### tail25：先建模逐帧关系，再汇聚段尾
 
@@ -194,7 +202,9 @@ $$
 
 在这组配置中，`stride5` 占 c、t 的一半权重；`tail25` 在 na 上占 0.36；两个 seed 成员合计占 i 的 0.60、bc 的 0.64。权重描述最终如何计算概率，本身不等于单个成员的性能或独立增益。
 
-![成员权重与各类 REF 比例](assets/ensemble-and-calibration.svg)
+![成员权重与各类 REF 比例](assets/ensemble-and-calibration.png)
+
+[查看矢量图](assets/ensemble-and-calibration.svg)
 
 ### 用 REF top-k 产生候选
 
@@ -244,7 +254,9 @@ BC 规则统计历史标签中 `BC` 的占比。若历史附和比例已经较�
 
 例如，上节片段的 BC 概率为 0.6145，若历史 BC 占比为 0.08，就满足删除条件。若同样的历史占比对应 0.81 的融合概率，则保留该候选。
 
-![BC 融合、top-k 与规则筛选的演示](assets/calibration-example.svg)
+![BC 融合、top-k 与规则筛选的演示](assets/calibration-example.png)
+
+[查看矢量图](assets/calibration-example.svg)
 
 ### I：用末尾的声学重叠筛选候选
 

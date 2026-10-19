@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="695" viewBox="0 0 1200 695" role="img" aria-labelledby="title desc">
+<title id="title">From probabilities to final BC labels</title><desc id="desc">Illustration: N = 1000 and REFbc = 0.104, so select the top 104 candidates first.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7c" /></marker></defs>
+<rect width="1200" height="695" rx="18" fill="#f7fafc" />
+<g font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">
+<text x="38" y="52" font-size="29" fill="#19334a" font-weight="700" text-anchor="start">From probabilities to final BC labels</text>
+<text x="38" y="84" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">Illustration: N = 1000 and REFbc = 0.104, so select the top 104 candidates first.</text>
+<rect x="36" y="117" width="355" height="103" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="56" y="151" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">01 · Per-class ensemble</text>
+<text x="56" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">Weighted sum of seven members</text>
+<text x="56" y="211" font-size="16.1" fill="#19334a" font-weight="400" text-anchor="start">Compute BC probability for each segment</text>
+<path d="M397,170 L418,170" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="426" y="117" width="355" height="103" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="446" y="151" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">02 · Per-column top-k</text>
+<text x="446" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">Sort by descending BC probability</text>
+<text x="446" y="211" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">Set the top 104 segments to 1</text>
+<path d="M787,170 L808,170" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)" />
+<rect x="816" y="117" width="348" height="103" rx="12" fill="#fff5e5" stroke="#cedce5" />
+<text x="836" y="151" font-size="22" fill="#bd862e" font-weight="700" text-anchor="start">03 · BC rule</text>
+<text x="836" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">History BC fraction ≥ 0.05</text>
+<text x="836" y="211" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">AND fused probability ≤ 0.6496688</text>
+<text x="56" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">Segment</text>
+<text x="210" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">BC probability</text>
+<text x="382" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">Rank</text>
+<text x="565" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">History BC fraction</text>
+<text x="770" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">After top-k</text>
+<text x="968" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">After BC rule</text>
+<rect x="36" y="306" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="56" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">A</text>
+<text x="210" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.6145</text>
+<text x="382" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">80</text>
+<text x="565" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.080</text>
+<text x="770" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1</text>
+<text x="968" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0 · Removed</text>
+<rect x="36" y="370" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="56" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">B</text>
+<text x="210" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.8100</text>
+<text x="382" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">35</text>
+<text x="565" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.080</text>
+<text x="770" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1</text>
+<text x="968" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1 · Kept</text>
+<rect x="36" y="434" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="56" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">C</text>
+<text x="210" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.5600</text>
+<text x="382" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">140</text>
+<text x="565" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.000</text>
+<text x="770" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0</text>
+<text x="968" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0 · Unchanged</text>
+<rect x="36" y="530" width="1128" height="108" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="56" y="564" font-size="22" fill="#218575" font-weight="700" text-anchor="start">The rule updates candidate labels without recomputing probabilities</text>
+<text x="56" y="597" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">A is a top-k candidate that meets the deletion rule. B is confident enough to be kept.</text>
+<text x="56" y="624" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">C is outside the candidate set. Removed candidates are not replaced to restore the count of 104.</text>
+<text x="36" y="674" font-size="17" fill="#536b7c" font-weight="400" text-anchor="start">Probabilities, ranks and segment IDs are illustrative, not actual samples or evaluation results.</text>
+</g></svg>

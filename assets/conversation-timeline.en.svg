@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+<title id="title">Use 30 seconds of history to predict the next 2 seconds</title><desc id="desc">One label frame is 80 ms. Extract features from history; use future frames to define targets.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7c" /></marker></defs>
+<rect width="1200" height="690" rx="18" fill="#f7fafc" />
+<g font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">
+<text x="38" y="52" font-size="29" fill="#19334a" font-weight="700" text-anchor="start">Use 30 seconds of history to predict the next 2 seconds</text>
+<text x="38" y="84" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">One label frame is 80 ms. Extract features from history; use future frames to define targets.</text>
+<text x="38" y="141" font-size="20" fill="#266fa5" font-weight="700" text-anchor="start">Input / pooling window</text>
+<line x1="280" y1="168" x2="280" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="280" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-30s</text>
+<line x1="520" y1="168" x2="520" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="520" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-20s</text>
+<line x1="760" y1="168" x2="760" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="760" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-10s</text>
+<line x1="856" y1="168" x2="856" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="856" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-6s</text>
+<line x1="904" y1="168" x2="904" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="904" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-4s</text>
+<line x1="952" y1="168" x2="952" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="952" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">-2s</text>
+<line x1="1000" y1="168" x2="1000" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="1000" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">0</text>
+<line x1="1048" y1="168" x2="1048" y2="540" stroke="#cedce5" stroke-dasharray="4 6" />
+<text x="1048" y="157" font-size="16" fill="#536b7c" font-weight="400" text-anchor="middle">2s</text>
+<line x1="1000" y1="164" x2="1000" y2="545" stroke="#218575" stroke-width="3" />
+<text x="1000" y="124" font-size="19" fill="#218575" font-weight="700" text-anchor="middle">Decision point</text>
+<text x="38" y="217" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">Audio / text / labels</text>
+<rect x="280" y="188" width="720" height="43" rx="6" fill="#dcebf7" stroke="#cedce5" />
+<text x="640.0" y="216" font-size="17" fill="#19334a" font-weight="400" text-anchor="middle">375 history frames</text>
+<text x="38" y="284" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">Audio tail pooling</text>
+<rect x="856" y="255" width="144" height="43" rx="6" fill="#d9eee8" stroke="#cedce5" />
+<text x="928.0" y="283" font-size="17" fill="#19334a" font-weight="400" text-anchor="middle">6 s</text>
+<text x="38" y="351" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">Label tail branch</text>
+<rect x="904" y="322" width="96" height="43" rx="6" fill="#d9eee8" stroke="#cedce5" />
+<text x="952.0" y="350" font-size="17" fill="#19334a" font-weight="400" text-anchor="middle">4 s</text>
+<text x="38" y="418" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">tail25 query pooling</text>
+<rect x="952" y="389" width="48" height="43" rx="6" fill="#d9eee8" stroke="#cedce5" />
+<text x="976.0" y="417" font-size="17" fill="#19334a" font-weight="400" text-anchor="middle">2 s</text>
+<text x="38" y="485" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">Main-task target</text>
+<rect x="1000" y="456" width="48" height="43" rx="6" fill="#ffe4b5" stroke="#cedce5" />
+<text x="1060" y="484" font-size="15.99" fill="#bd862e" font-weight="400" text-anchor="start">25 future frames</text>
+<rect x="38" y="572" width="538" height="84" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="58" y="606" font-size="22" fill="#bd862e" font-weight="700" text-anchor="start">Main head: occurrence within the window</text>
+<text x="58" y="639" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">Five independent probabilities: c / na / i / bc / t</text>
+<rect x="598" y="572" width="563" height="84" rx="12" fill="#fff" stroke="#cedce5" />
+<text x="618" y="606" font-size="22" fill="#218575" font-weight="700" text-anchor="start">FutureAux: labels at specific horizons</text>
+<text x="618" y="639" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">+400 / +800 / +1200 / +2000 ms; enabled per member</text>
+</g></svg>
