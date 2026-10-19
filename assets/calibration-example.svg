@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="695" viewBox="0 0 1200 695" role="img" aria-labelledby="title desc">
+<title id="title">从概率到最终 BC 标签</title><desc id="desc">演示数据：N = 1000，REFbc = 0.104，因此先选出概率最高的 104 个候选。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7c"/></marker></defs>
+<rect width="1200" height="695" rx="18" fill="#f7fafc"/>
+<g font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">
+<text x="38" y="52" font-size="29" fill="#19334a" font-weight="700" text-anchor="start">从概率到最终 BC 标签</text>
+<text x="38" y="84" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">演示数据：N = 1000，REFbc = 0.104，因此先选出概率最高的 104 个候选。</text>
+<rect x="36" y="117" width="355" height="103" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="151" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">01 · 按类融合</text>
+<text x="56" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">七源权重加权求和</text>
+<text x="56" y="211" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">为每个片段计算 BC 概率</text>
+<path d="M397,170 L418,170" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="426" y="117" width="355" height="103" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="446" y="151" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">02 · 按列 top-k</text>
+<text x="446" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">按 BC 概率降序排列</text>
+<text x="446" y="211" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">前 104 个片段置为 1</text>
+<path d="M787,170 L808,170" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="816" y="117" width="348" height="103" rx="12" fill="#fff5e5" stroke="#cedce5"/>
+<text x="836" y="151" font-size="22" fill="#bd862e" font-weight="700" text-anchor="start">03 · BC 规则</text>
+<text x="836" y="184" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">历史 BC 占比 ≥ 0.05</text>
+<text x="836" y="211" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">且融合概率 ≤ 0.6496688</text>
+<text x="56" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">示例片段</text>
+<text x="210" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">BC 概率</text>
+<text x="382" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">概率名次</text>
+<text x="565" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">历史 BC 占比</text>
+<text x="770" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">top-k 后</text>
+<text x="968" y="278" font-size="18" fill="#266fa5" font-weight="700" text-anchor="start">BC 规则后</text>
+<rect x="36" y="306" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">A</text>
+<text x="210" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.6145</text>
+<text x="382" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">80</text>
+<text x="565" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.080</text>
+<text x="770" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1</text>
+<text x="968" y="340" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0 · 删除</text>
+<rect x="36" y="370" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">B</text>
+<text x="210" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.8100</text>
+<text x="382" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">35</text>
+<text x="565" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.080</text>
+<text x="770" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1</text>
+<text x="968" y="404" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">1 · 保留</text>
+<rect x="36" y="434" width="1128" height="52" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">C</text>
+<text x="210" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.5600</text>
+<text x="382" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">140</text>
+<text x="565" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0.000</text>
+<text x="770" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0</text>
+<text x="968" y="468" font-size="20" fill="#19334a" font-weight="400" text-anchor="start">0 · 不变</text>
+<rect x="36" y="530" width="1128" height="108" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="564" font-size="22" fill="#218575" font-weight="700" text-anchor="start">规则改变候选标签，不重新计算概率</text>
+<text x="56" y="597" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">A 已进入 top-k，但同时满足删除条件；B 的置信度高于阈值，因此保留。</text>
+<text x="56" y="624" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">C 未进入候选集合。BC 规则只删除正例，不把其他样本补回到 104 个。</text>
+<text x="36" y="674" font-size="17" fill="#536b7c" font-weight="400" text-anchor="start">所有概率、名次和片段代号仅用于说明算法，不代表真实样本或评测结果。</text>
+</g></svg>

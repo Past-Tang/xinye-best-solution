@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="756" viewBox="0 0 1200 756" role="img" aria-labelledby="title desc">
+<title id="title">两条时序分支，各自保留不同的信息</title><desc id="desc">tail25 保留声道与帧序列；Activity TCN 建模声音和 ASR 的活动变化。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7c"/></marker></defs>
+<rect width="1200" height="756" rx="18" fill="#f7fafc"/>
+<g font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">
+<text x="38" y="52" font-size="29" fill="#19334a" font-weight="700" text-anchor="start">两条时序分支，各自保留不同的信息</text>
+<text x="38" y="84" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">tail25 保留声道与帧序列；Activity TCN 建模声音和 ASR 的活动变化。</text>
+<rect x="30" y="116" width="1140" height="278" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="51" y="153" font-size="23" fill="#266fa5" font-weight="700" text-anchor="start">tail25 · 逐帧多模态融合</text>
+<rect x="52" y="185" width="244" height="125" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="72" y="219" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">双声道隐状态</text>
+<text x="72" y="252" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">每声道 1500 帧</text>
+<text x="72" y="279" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">共享卷积下采样</text>
+<text x="72" y="306" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">→ 每声道 375 × 320</text>
+<path d="M301,246 L324,246" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="185" width="244" height="125" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="350" y="219" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">逐帧拼接</text>
+<text x="350" y="252" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">ch0 / ch1 / |差分|</text>
+<text x="350" y="279" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">加历史标签 embedding</text>
+<text x="350" y="306" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">→ 384 维 + 位置编码</text>
+<path d="M578,246 L601,246" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="607" y="185" width="244" height="125" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="627" y="219" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">时序 Transformer</text>
+<text x="627" y="252" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">2 层 · 6 个注意力头</text>
+<text x="627" y="279" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">375 帧历史参与计算</text>
+<text x="627" y="306" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">末尾 25 帧 query 汇聚</text>
+<path d="M855,246 L878,246" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="884" y="185" width="261" height="125" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="904" y="219" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">预测头</text>
+<text x="904" y="252" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">拼接 Qwen 文本表示</text>
+<text x="904" y="279" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">1408 → 512 → 128 → 5</text>
+<text x="904" y="306" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">五列 sigmoid</text>
+<text x="52" y="360" font-size="18" fill="#536b7c" font-weight="400" text-anchor="start">最后 25 帧的表示已经整合历史上下文；汇聚末尾 2 秒不等于只输入 2 秒。</text>
+<rect x="30" y="420" width="1140" height="299" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="51" y="458" font-size="23" fill="#218575" font-weight="700" text-anchor="start">Activity TCN · 轻量活动序列</text>
+<rect x="52" y="490" width="244" height="132" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="72" y="524" font-size="22" fill="#218575" font-weight="700" text-anchor="start">62 维 / 80 ms</text>
+<text x="72" y="557" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">双声道能量与活动状态</text>
+<text x="72" y="584" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">ASR 起止 / 短回应活动</text>
+<text x="72" y="611" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">按训练集统计量标准化</text>
+<path d="M301,552 L324,552" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="490" width="244" height="132" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="350" y="524" font-size="22" fill="#218575" font-weight="700" text-anchor="start">时序卷积</text>
+<text x="350" y="557" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">投影到 128 维</text>
+<text x="350" y="584" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">6 个残差卷积块</text>
+<text x="350" y="611" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">膨胀率 1 / 2 / 4 / 8 / 16 / 32</text>
+<path d="M578,552 L601,552" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="607" y="490" width="244" height="132" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="627" y="524" font-size="22" fill="#218575" font-weight="700" text-anchor="start">四路汇聚</text>
+<text x="627" y="557" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">末帧 / 末 50 帧均值</text>
+<text x="627" y="584" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">末 50 帧最大值</text>
+<text x="627" y="611" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">全序列 attention pooling</text>
+<path d="M855,552 L878,552" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="884" y="490" width="261" height="132" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="904" y="524" font-size="22" fill="#218575" font-weight="700" text-anchor="start">预测头</text>
+<text x="904" y="557" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">拼接为 512 维</text>
+<text x="904" y="584" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">MLP → 五列 sigmoid</text>
+<text x="904" y="611" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">独立作为第七个融合成员</text>
+<text x="52" y="674" font-size="18" fill="#536b7c" font-weight="400" text-anchor="start">此成员使用音频和 ASR 活动特征，不使用历史事件标签；训练另带未来时距辅助头。</text>
+</g></svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="806" viewBox="0 0 1200 806" role="img" aria-labelledby="title desc">
+<title id="title">多模态成员 · 声音、文本与历史状态</title><desc id="desc">常规成员共享编码框架；main 与 mean_diff 成员采用不同的双声道汇聚方式。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7c"/></marker></defs>
+<rect width="1200" height="806" rx="18" fill="#f7fafc"/>
+<g font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">
+<text x="38" y="52" font-size="29" fill="#19334a" font-weight="700" text-anchor="start">多模态成员 · 声音、文本与历史状态</text>
+<text x="38" y="84" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">常规成员共享编码框架；main 与 mean_diff 成员采用不同的双声道汇聚方式。</text>
+<rect x="36" y="120" width="352" height="95" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="154" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">双声道音频</text>
+<text x="56" y="187" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">16 kHz · B × 2 × 480000</text>
+<rect x="424" y="120" width="352" height="95" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="444" y="154" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">对话文本</text>
+<text x="444" y="187" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">角色标记 + 历史转写 · 最多 256 token</text>
+<rect x="812" y="120" width="352" height="95" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="832" y="154" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">历史事件标签</text>
+<text x="832" y="187" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">375 帧 · 5 种标签</text>
+<path d="M212,215 L212,251" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M600,215 L600,251" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M988,215 L988,251" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="36" y="257" width="352" height="103" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="56" y="291" font-size="20" fill="#266fa5" font-weight="700" text-anchor="start">共享 Whisper-large-v3 encoder</text>
+<text x="56" y="324" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">两声道分别编码 · 音频 LoRA</text>
+<text x="56" y="351" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">每声道 B × 1500 × 1280</text>
+<rect x="424" y="257" width="352" height="103" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="444" y="291" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">Qwen3-0.6B</text>
+<text x="444" y="324" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">主干通常冻结</text>
+<text x="444" y="351" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">textlora 成员训练文本 LoRA</text>
+<rect x="812" y="257" width="352" height="103" rx="12" fill="#fff" stroke="#cedce5"/>
+<text x="832" y="291" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">ContextLabelEncoder</text>
+<text x="832" y="324" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">全窗口卷积 + attention pooling</text>
+<text x="832" y="351" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">末尾 50 帧卷积 + 展平投影</text>
+<path d="M212,360 L212,397" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M600,360 L600,397" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M988,360 L988,397" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="36" y="403" width="352" height="134" rx="12" fill="#eaf4fb" stroke="#cedce5"/>
+<text x="56" y="437" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">音频汇聚</text>
+<text x="56" y="470" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">main：逐帧均值 → 尾部池化</text>
+<text x="56" y="497" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">其余常规成员：分别尾部池化</text>
+<text x="56" y="524" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">→ 均值 / 绝对差 → 投影</text>
+<rect x="424" y="403" width="352" height="134" rx="12" fill="#eaf4fb" stroke="#cedce5"/>
+<text x="444" y="437" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">文本汇聚</text>
+<text x="444" y="470" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">编码序列尾部 30%</text>
+<text x="444" y="497" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">attention pooling</text>
+<text x="444" y="524" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">1024 维</text>
+<rect x="812" y="403" width="352" height="134" rx="12" fill="#eaf4fb" stroke="#cedce5"/>
+<text x="832" y="437" font-size="22" fill="#266fa5" font-weight="700" text-anchor="start">状态汇聚</text>
+<text x="832" y="470" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">完整历史 + 末尾 4 秒</text>
+<text x="832" y="497" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">两支拼接</text>
+<text x="832" y="524" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">128 维</text>
+<path d="M212,537 L212,567 L600,567 L600,596" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M600,537 L600,596" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M988,537 L988,567 L600,567" fill="none" stroke="#536b7c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="245" y="603" width="710" height="95" rx="12" fill="#e9f5f0" stroke="#cedce5"/>
+<text x="265" y="637" font-size="20" fill="#218575" font-weight="700" text-anchor="start">拼接 2432 维 → MLP 512 → 128 → 5</text>
+<text x="265" y="670" font-size="17" fill="#19334a" font-weight="400" text-anchor="start">GELU + Dropout → 五列 sigmoid 概率</text>
+<text x="40" y="751" font-size="18" fill="#19334a" font-weight="400" text-anchor="start">训练时：音频序列还接入 ChunkAux；textlora 额外启用 FutureAux 与 BC 专项损失。</text>
+<text x="40" y="781" font-size="16" fill="#536b7c" font-weight="400" text-anchor="start">图中为推理数据流；tail25 的逐帧融合结构见下图。</text>
+</g></svg>

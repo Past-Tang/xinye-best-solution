@@ -1,0 +1,773 @@
+{
+  "description": "Architecture metadata read from preserved member checkpoints; base model weights are external. This metadata does not independently establish identity with the original scoring image.",
+  "members": [
+    {
+      "checkpoint": "main_e12_slim.pt",
+      "sha256": "ee32e6799add4dc078fc5deac3845f9841ec688d6862428de1d3584238d19546",
+      "saved_config": {
+        "model": null,
+        "seed": 42,
+        "stride": 25,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": true,
+          "tail_ratio": 0.3
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 50
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "target_modules": [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "out_proj"
+          ],
+          "gradient_checkpointing": true
+        },
+        "chunk_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "num_classes": 5,
+          "whisper_frames": 1500,
+          "target_frames": 375,
+          "label_smoothing": 0.1
+        },
+        "future_aux": null,
+        "temporal": null,
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "epochs": 25,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 24,
+          "eval_batch_size": 32,
+          "log_every_steps": 20,
+          "learning_rate": 0.0003,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 6,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "mix2": {
+          "prob": 0.5,
+          "alpha": 0.4,
+          "k_max": 3,
+          "modes": [
+            "mixup",
+            "multimix"
+          ]
+        },
+        "robust_asl": {
+          "gamma_neg": 4.0,
+          "gamma_pos": 0.0,
+          "margin": 0.05,
+          "hill_lambda": 1.5
+        }
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": false,
+      "has_audio_mean_diff_projection": false
+    },
+    {
+      "checkpoint": "stride5_e16_slim.pt",
+      "sha256": "800f7f5240590c3c56446783a6c862bf85dee21d7cd223c713c8ac5cc9381690",
+      "saved_config": {
+        "model": null,
+        "seed": 42,
+        "stride": 5,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300,
+          "attn_implementation": "sdpa",
+          "channel_pool_mode": "mean_diff"
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": true,
+          "tail_ratio": 0.3
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 50
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "target_modules": [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "out_proj"
+          ],
+          "gradient_checkpointing": true
+        },
+        "chunk_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "num_classes": 5,
+          "whisper_frames": 1500,
+          "target_frames": 375,
+          "label_smoothing": 0.1
+        },
+        "future_aux": null,
+        "temporal": null,
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "epochs": 25,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 24,
+          "eval_batch_size": 32,
+          "log_every_steps": 20,
+          "learning_rate": 0.0003,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_ema_decay": 0.999,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 6,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "mix2": {
+          "prob": 0.5,
+          "alpha": 0.4,
+          "k_max": 3,
+          "modes": [
+            "mixup",
+            "multimix"
+          ]
+        },
+        "robust_asl": {
+          "gamma_neg": 4.0,
+          "gamma_pos": 0.0,
+          "margin": 0.05,
+          "hill_lambda": 1.5
+        }
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": false,
+      "has_audio_mean_diff_projection": true
+    },
+    {
+      "checkpoint": "textlora_e09_slim.pt",
+      "sha256": "e2bf1015a5247826b88b0a621ac6a3b7737485fe1a869477448f05eca1da7c3f",
+      "saved_config": {
+        "model": {
+          "type": "lora_chunkaux"
+        },
+        "seed": 42,
+        "stride": 25,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300,
+          "channel_pool_mode": "mean_diff",
+          "attn_implementation": "sdpa"
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": false,
+          "tail_ratio": 0.3,
+          "lora": {
+            "enabled": true,
+            "r": 8,
+            "alpha": 16,
+            "dropout": 0.05,
+            "target_modules": [
+              "q_proj",
+              "k_proj",
+              "v_proj",
+              "o_proj"
+            ],
+            "gradient_checkpointing": true
+          }
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 50
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "target_modules": [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "out_proj"
+          ],
+          "gradient_checkpointing": true
+        },
+        "chunk_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "num_classes": 5,
+          "whisper_frames": 1500,
+          "target_frames": 375,
+          "label_smoothing": 0.1
+        },
+        "future_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "horizons": [
+            5,
+            10,
+            15,
+            25
+          ],
+          "tail_frames": 150,
+          "label_smoothing": 0.1,
+          "loss_weight": 0.3
+        },
+        "temporal": null,
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "pos_weight": [
+            1.0,
+            1.0,
+            1.5,
+            3.0,
+            1.5
+          ],
+          "mutex_weight": 0.0,
+          "bc_bce_weight": 0.3,
+          "bc_bce_pos_weight": 20.0,
+          "epochs": 18,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 16,
+          "eval_batch_size": 24,
+          "log_every_steps": 20,
+          "learning_rate": 0.0003,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_ema_decay": 0.999,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 5,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "mix2": {
+          "prob": 0.5,
+          "alpha": 0.4,
+          "k_max": 3,
+          "modes": [
+            "mixup",
+            "multimix"
+          ]
+        },
+        "robust_asl": {
+          "gamma_neg": 4.0,
+          "gamma_pos": 0.0,
+          "margin": 0.05,
+          "hill_lambda": 1.5
+        }
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": true,
+      "has_audio_mean_diff_projection": true
+    },
+    {
+      "checkpoint": "tail25_slim.pt",
+      "sha256": "f52a4eaeb26cadf74887da9226165ddccce0ed3ba39349ef812b26e75499aba8",
+      "saved_config": {
+        "model": {
+          "type": "temporal"
+        },
+        "seed": 42,
+        "stride": 25,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300,
+          "attn_implementation": "sdpa"
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": true,
+          "tail_ratio": 0.3
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 25
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "target_modules": [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "out_proj"
+          ],
+          "gradient_checkpointing": true
+        },
+        "chunk_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "num_classes": 5,
+          "whisper_frames": 1500,
+          "target_frames": 375,
+          "label_smoothing": 0.1
+        },
+        "future_aux": {
+          "enabled": true,
+          "mid_dim": 256,
+          "horizons": [
+            5,
+            10,
+            15,
+            25
+          ],
+          "tail_frames": 150,
+          "label_smoothing": 0.1,
+          "loss_weight": 0.3
+        },
+        "temporal": {
+          "frame_mid": 320,
+          "d_model": 384,
+          "layers": 2,
+          "heads": 6,
+          "dropout": 0.1,
+          "tail_k": 25
+        },
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "pos_weight": [
+            1.0,
+            1.0,
+            1.5,
+            3.0,
+            1.5
+          ],
+          "mutex_weight": 0.3,
+          "epochs": 25,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 24,
+          "eval_batch_size": 32,
+          "log_every_steps": 20,
+          "learning_rate": 0.0003,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_ema_decay": 0.999,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 6,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "mix2": {
+          "prob": 0.5,
+          "alpha": 0.4,
+          "k_max": 3,
+          "modes": [
+            "mixup",
+            "multimix"
+          ]
+        },
+        "robust_asl": {
+          "gamma_neg": 4.0,
+          "gamma_pos": 0.0,
+          "margin": 0.05,
+          "hill_lambda": 1.5
+        }
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": true,
+      "has_audio_mean_diff_projection": false
+    },
+    {
+      "checkpoint": "s123_heavy_slim.pt",
+      "sha256": "7e736ecbeae0758a8799574e8ed3ee73ff40eeb0fff197a6ab9c51bc25e56fd9",
+      "saved_config": {
+        "model": null,
+        "seed": 123,
+        "stride": 25,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300,
+          "channel_pool_mode": "mean_diff"
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": true,
+          "tail_ratio": 0.3
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 50
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "target_modules": [
+            "q_proj",
+            "v_proj"
+          ],
+          "dropout": 0.05
+        },
+        "chunk_aux": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "future_aux": null,
+        "temporal": null,
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "pos_weight": [
+            1.0,
+            1.5,
+            5.0,
+            3.0,
+            1.0
+          ],
+          "epochs": 40,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 48,
+          "eval_batch_size": 48,
+          "log_every_steps": 20,
+          "learning_rate": 0.00025,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 10,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": null,
+        "mix2": null,
+        "robust_asl": null
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": false,
+      "has_audio_mean_diff_projection": true
+    },
+    {
+      "checkpoint": "s124_aggressive_slim.pt",
+      "sha256": "2bd16ef3a6e15853d4374f9c6cf9eff74b46e674a11652d0874233f65907b48f",
+      "saved_config": {
+        "model": null,
+        "seed": 124,
+        "stride": 25,
+        "audio_encoder": {
+          "type": "whisper_lora_chunkaux",
+          "tail_frames": 300,
+          "channel_pool_mode": "mean_diff"
+        },
+        "text_encoder": {
+          "max_length": 256,
+          "freeze_backbone": true,
+          "tail_ratio": 0.3
+        },
+        "context_encoder": {
+          "vocab_size": 5,
+          "embed_dim": 16,
+          "channels": [
+            32,
+            64
+          ],
+          "tail_k": 50
+        },
+        "lora": {
+          "r": 16,
+          "alpha": 32,
+          "target_modules": [
+            "q_proj",
+            "v_proj"
+          ],
+          "dropout": 0.05
+        },
+        "chunk_aux": {
+          "e_strong": 5,
+          "e_mid": 15,
+          "w_strong": 0.5,
+          "w_mid": 0.3,
+          "w_late": 0.1
+        },
+        "future_aux": null,
+        "temporal": null,
+        "train": {
+          "multi_label": true,
+          "pos_weight_mode": "per_label",
+          "pos_weight": [
+            1.0,
+            1.5,
+            7.0,
+            4.0,
+            1.5
+          ],
+          "epochs": 40,
+          "max_steps_per_epoch": 600,
+          "eval_valid_max_batches": null,
+          "batch_size": 32,
+          "eval_batch_size": 40,
+          "log_every_steps": 20,
+          "learning_rate": 0.00025,
+          "warmup_ratio": 0.05,
+          "ema_decay": 0.98,
+          "weight_decay": 0.01,
+          "grad_clip_norm": 1.0,
+          "use_amp": true,
+          "amp_dtype": "bf16",
+          "gradient_accumulation_steps": 1,
+          "save_metric": "tuned_macro_f1",
+          "early_stop_patience": 10,
+          "tuned_eval_subset": 20000,
+          "tuned_eval_subset_seed": 42,
+          "tuned_eval_threshold_min": 0.05,
+          "tuned_eval_threshold_max": 0.95,
+          "tuned_eval_threshold_step": 0.01,
+          "save_epoch_checkpoints": true
+        },
+        "aux_schedule": null,
+        "mix2": null,
+        "robust_asl": null
+      },
+      "activity_training_args": null,
+      "activity_feature_names": null,
+      "has_future_aux_parameters": false,
+      "has_audio_mean_diff_projection": true
+    },
+    {
+      "checkpoint": "activity_tcn_best.pt",
+      "sha256": "dea91c909d27c31ee43c89b365f76ee75763c73e6fdc3ba979ae86e549dd5908",
+      "saved_config": {
+        "model": null,
+        "seed": null,
+        "stride": null,
+        "audio_encoder": null,
+        "text_encoder": null,
+        "context_encoder": null,
+        "lora": null,
+        "chunk_aux": null,
+        "future_aux": null,
+        "temporal": null,
+        "train": null,
+        "aux_schedule": null,
+        "mix2": null,
+        "robust_asl": null
+      },
+      "activity_training_args": {
+        "out": "outputs/oof/activity_tcn_grid25_gpu0.npz",
+        "stride": 25,
+        "epochs": 18,
+        "batch_size": 1024,
+        "eval_batch_size": 4096,
+        "lr": 0.002,
+        "weight_decay": 0.001,
+        "hidden": 128,
+        "layers": 6,
+        "dropout": 0.15,
+        "aux_weight": 0.2,
+        "horizons": "5,10,15,25",
+        "pos_weight_power": 0.5,
+        "max_pos_weight": 16.0,
+        "max_train_samples": null,
+        "max_valid_samples": null,
+        "max_train_convs": null,
+        "max_valid_convs": null,
+        "use_state": false,
+        "no_text": false,
+        "no_audio": false,
+        "train_all": false,
+        "test_root": null,
+        "output_test_probs": null,
+        "output_test_ids": null,
+        "device": "cuda",
+        "seed": null,
+        "num_workers": 0,
+        "grad_clip": 1.0
+      },
+      "activity_feature_names": [
+        "audio_loge_ch0",
+        "audio_loge_ch1",
+        "audio_loge_diff",
+        "audio_loge_absdiff",
+        "audio_loge_max",
+        "audio_loge_min",
+        "audio_peak_ch0",
+        "audio_peak_ch1",
+        "audio_peak_diff",
+        "audio_peak_absdiff",
+        "audio_peak_max",
+        "audio_peak_min",
+        "audio_abs_any",
+        "audio_abs_overlap",
+        "audio_abs_silence",
+        "audio_abs_xor",
+        "audio_abs_ch0_start",
+        "audio_abs_ch1_start",
+        "audio_abs_any_start",
+        "audio_abs_dominance",
+        "audio_rel_any",
+        "audio_rel_overlap",
+        "audio_rel_silence",
+        "audio_rel_xor",
+        "audio_rel_ch0_start",
+        "audio_rel_ch1_start",
+        "audio_rel_any_start",
+        "audio_rel_dominance",
+        "asr_active_any",
+        "asr_active_overlap",
+        "asr_active_silence",
+        "asr_active_xor",
+        "asr_active_ch0_start",
+        "asr_active_ch1_start",
+        "asr_active_any_start",
+        "asr_active_dominance",
+        "asr_short_any",
+        "asr_short_overlap",
+        "asr_short_silence",
+        "asr_short_xor",
+        "asr_short_ch0_start",
+        "asr_short_ch1_start",
+        "asr_short_any_start",
+        "asr_short_dominance",
+        "asr_chars_ch0",
+        "asr_chars_ch1",
+        "asr_chars_diff",
+        "asr_chars_absdiff",
+        "asr_chars_max",
+        "asr_chars_min",
+        "asr_starts_ch0",
+        "asr_starts_ch1",
+        "asr_starts_diff",
+        "asr_starts_absdiff",
+        "asr_starts_max",
+        "asr_starts_min",
+        "asr_ends_ch0",
+        "asr_ends_ch1",
+        "asr_ends_diff",
+        "asr_ends_absdiff",
+        "asr_ends_max",
+        "asr_ends_min"
+      ],
+      "has_future_aux_parameters": false,
+      "has_audio_mean_diff_projection": false,
+      "has_activity_future_head": true
+    }
+  ]
+}
