@@ -4,8 +4,6 @@
 
 本方案使用 **Whisper-large-v3 + Qwen3-0.6B** 建模语音与文本，结合历史状态和独立的活动时序模型，得到七组预测。随后按类别加权融合，通过 REF top-k 控制各类候选数量，再用历史附和比例和声学重叠特征筛选 BC、I 预测。最终配置为 **v161_bc104**，复赛最佳成绩为 **0.668080 macro F1**。
 
-![历史输入、末尾汇聚范围与未来预测窗口](assets/conversation-timeline.svg)
-
 | 项目 | 最终方案 |
 |---|---|
 | 历史窗口 / 预测窗口 | 30 秒 / 2 秒 |
@@ -50,11 +48,9 @@ $$
 
 历史事件标签描述此前的对话状态。常规模型分别编码完整的 375 帧和末尾 50 帧，再拼接两路表示；前者提供长一些的历史，后者保留决策点前 4 秒的局部变化。
 
-图中的“末尾 6 秒”指音频隐藏状态的池化范围，“末尾 2 秒”指 `tail25` 的 query 汇聚范围。Whisper 编码器仍然处理完整的 30 秒音频。
+常规模型对末尾 6 秒的音频隐藏状态做池化，`tail25` 则对末尾 2 秒做 query 汇聚。Whisper 编码器仍然处理完整的 30 秒音频。
 
 ## 多模态模型
-
-![常规多模态模型的三路编码与融合结构](assets/multimodal-architecture.svg)
 
 ### 音频编码与双声道汇聚
 
@@ -72,7 +68,7 @@ u_{\mathrm{diff}}=|u_0-u_1|,
 $$
 
 $$
-a=\operatorname{GELU}\left(\operatorname{LayerNorm}\left(W_a[u_{\mathrm{mean}};u_{\mathrm{diff}}]+b_a\right)\right).
+a=\mathrm{GELU}\left(\mathrm{LayerNorm}\left(W_a[u_{\mathrm{mean}};u_{\mathrm{diff}}]+b_a\right)\right).
 $$
 
 均值保留两侧共有的表示，绝对差表达两侧活动的不同程度。投影将拼接后的 2,560 维恢复为 1,280 维，以便与其他输入融合。`tail25` 使用独立的逐帧结构，见下一节。
@@ -94,8 +90,6 @@ $$
 随后通过 `2432 → 512 → 128 → 5` 的 MLP。隐藏层使用 GELU 和 dropout，输出为五个 logits，经过 sigmoid 后得到五列概率。每个成员独立生成一份 `[N, 5]` 概率矩阵，供后续融合使用。
 
 ## 时序与活动分支
-
-![tail25 与 Activity TCN 的内部结构](assets/temporal-branches.svg)
 
 ### tail25：先建模逐帧关系，再汇聚段尾
 
@@ -194,14 +188,12 @@ $$
 
 在这组配置中，`stride5` 占 c、t 的一半权重；`tail25` 在 na 上占 0.36；两个 seed 成员合计占 i 的 0.60、bc 的 0.64。权重描述最终如何计算概率，本身不等于单个成员的性能或独立增益。
 
-![成员权重与各类 REF 比例](assets/ensemble-and-calibration.svg)
-
 ### 用 REF top-k 产生候选
 
 最终二值化按每一列的概率排序进行。对 $N$ 个样本，类别 $c$ 选择：
 
 $$
-K_c=\operatorname{round}(N\cdot\mathrm{REF}_c)
+K_c=\mathrm{round}(N\cdot\mathrm{REF}_c)
 $$
 
 个最高分样本置为 1，其余置为 0。
@@ -244,8 +236,6 @@ BC 规则统计历史标签中 `BC` 的占比。若历史附和比例已经较�
 
 例如，上节片段的 BC 概率为 0.6145，若历史 BC 占比为 0.08，就满足删除条件。若同样的历史占比对应 0.81 的融合概率，则保留该候选。
 
-![BC 融合、top-k 与规则筛选的演示](assets/calibration-example.svg)
-
 ### I：用末尾的声学重叠筛选候选
 
 I 规则额外使用 callhome-zho 声学模型提取重叠说话概率。这一路输出用于规则判断，不作为第八个五分类成员参与加权。
@@ -268,7 +258,7 @@ I 规则额外使用 callhome-zho 声学模型提取重叠说话概率。这一�
 最终配置 **v161_bc104** 的最佳成绩为 **0.668080 macro F1**。评价先分别计算五个类别的二分类 F1，再取平均：
 
 $$
-\operatorname{MacroF1}=\frac{1}{5}\sum_{c=1}^{5}\frac{2TP_c}{2TP_c+FP_c+FN_c}.
+\mathrm{MacroF1}=\frac{1}{5}\sum_{c=1}^{5}\frac{2TP_c}{2TP_c+FP_c+FN_c}.
 $$
 
 五个类别在最终指标中占相同权重。融合表和 REF 表展示的是最终配置，不是各类别 F1 的分解。
